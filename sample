@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#Custom PATH
+if [ -d "$HOME/doom" ]; then
+	echo "Directory ~/doom already exists, skipping."
+
+elif [ ! -d "$HOME/doom" ]; then
+	mkdir "$HOME/doom"
+	echo "Created directory at ~/doom"	
+fi
+
+export PATH="$PATH:$HOME/doom"
+
+#Main code
+cd "$HOME/doom/" || exit
+
+printf '%s\n' *
+read -e -r -p 'IWAD: ' iwad
+
+printf '%s\n' *
+read -e -r -p 'PWAD (leave empty for no PWAD): ' pwad
+
+if [[ $iwad == *.WAD || $iwad == *.wad ]] && [[ $pwad == *.WAD || $pwad == *.wad ]]; then
+#By default, we use gzdoom. It should work on other source ports, too.
+	gzdoom -iwad "$HOME/doom/${iwad}" -file "$HOME/doom/${pwad}"
+elif [[ -z $pwad ]]; then
+	gzdoom -iwad "$HOME/doom/${iwad}"
+fi
