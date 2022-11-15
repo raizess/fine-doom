@@ -14,10 +14,8 @@ export PATH="$PATH:$HOME/doom"
 #Main code
 cd "$HOME/doom/" || exit
 
-printf '%s\n' *
 read -e -r -p 'IWAD: ' iwad
 
-printf '%s\n' *
 read -e -r -p 'PWAD (leave empty for no PWAD): ' pwad
 
 if [[ $iwad == *.WAD || $iwad == *.wad ]] && [[ $pwad == *.WAD || $pwad == *.wad ]]; then
